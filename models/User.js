@@ -2,13 +2,22 @@ const { Schema, model } = require("mongoose");
 
 //Schema to create User model
 
-//const User = mongoose.model("User", mongoose.Schema({}))
 const userSchema = new Schema(
   {
     username: { type: String, required: true, unique: true, trim: true },
     email: { type: String, required: true, unique: true, match: /.+\@.+\..+/ },
-    thoughts: {}, //array of _id values referencing the Thought model
-    friends: {}, //array of _id values referencing the User model (self-reference)
+    thoughts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Thought",
+      },
+    ], //array of _id values referencing the Thought model
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ], //array of _id values referencing the User model (self-reference)
   },
   {
     toJSON: {
@@ -24,11 +33,10 @@ userSchema
   .virtual("friendCount")
   //Getter
   .get(function () {
-    return `${friends.length}`;
-    //Do I need a Setter?
+    return `${this.friends.length}`;
   });
 
 //Initialize the User model
-const User = model("user", userSchema);
+const User = model("User", userSchema);
 
 module.exports = User;
