@@ -5,7 +5,7 @@ const reactionSchema = require("./Reaction");
 //   mongoose.Schema({
 const thoughtSchema = new Schema(
   {
-    thoughtText: { type: String, required: true, match: "/^.{0,280}$/" },
+    thoughtText: { type: String, required: true, minLength: 1, maxLength: 280 },
     createdAt: {
       type: Date,
       default: Date.now,

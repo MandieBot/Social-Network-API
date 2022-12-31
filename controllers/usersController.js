@@ -40,7 +40,6 @@ module.exports = {
     User.findOneAndUpdate({ _id: req.params.userId }, { $push: { friends: req.params.friendId } })
       .then((user) => {
         res.status(200).json(user);
-        // console.log(user);
       })
 
       .catch((err) => res.status(500).json(err));
@@ -50,7 +49,6 @@ module.exports = {
     User.findOneAndUpdate({ _id: req.params.userId }, { $pull: { friends: req.params.friendId } })
       .then((user) => {
         res.status(200).json(user);
-        // console.log(user);
       })
 
       .catch((err) => res.status(500).json(err));
