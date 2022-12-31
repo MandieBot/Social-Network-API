@@ -1,8 +1,8 @@
 const { Schema, model } = require("mongoose");
 const reactionSchema = require("./Reaction");
-// const Thought = mongoose.model(
-//   "Thought",
-//   mongoose.Schema({
+
+//Schema to create thought Model
+
 const thoughtSchema = new Schema(
   {
     thoughtText: { type: String, required: true, minLength: 1, maxLength: 280 },
@@ -10,7 +10,7 @@ const thoughtSchema = new Schema(
       type: Date,
       default: Date.now,
       get: (date) => new Date(date).toLocaleDateString(),
-    }, //needs the following: Date, Set default value to the current timestamp, Use a getter method to format the timestamp on query
+    },
 
     //user that created this thought
     username: { type: String, required: true },
